@@ -57,7 +57,6 @@ export class CharacterDetailModal {
                                 src="${resultImage}" 
                                 class="w-40 h-40 mx-auto object-cover border-2 border-red-900 mb-4 shadow-[0_0_20px_rgba(255,0,0,0.5)]" 
                                 alt=""
-                                onerror="this.src='https://picsum.photos/200/200?random=dead'"
                             />
                             <p class="text-gray-400 text-sm uppercase tracking-widest mb-2">HEDEF DURUMU: <span class="text-white font-bold">ÖLÜ</span></p>
                             <div class="py-4 border-t border-b border-gray-800">
@@ -99,7 +98,6 @@ export class CharacterDetailModal {
                                     src="${imagePath}" 
                                     alt="${this.character.name}"
                                     class="w-full h-full object-cover"
-                                    onerror="this.src='https://picsum.photos/300/400?random=${this.character.id}'"
                                 />
                                 ${this.character.status === 'DEAD' ? `
                                     <div class="absolute inset-0 flex items-center justify-center">

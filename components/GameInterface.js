@@ -176,6 +176,21 @@ export class GameInterface {
 
         const newDay = this.currentDay + 1;
         this.currentDay = newDay;
+        
+        // Check if all soldiers are dead after day change
+        const allDead = this.roster.every(char => char.status === 'DEAD');
+        if (allDead) {
+            this.isProcessingDayChange = false;
+            this.showAllDeadGameOver();
+            return;
+        }
+        
+        // Check for morale death after day change (not during AI twist mode days 6-7)
+        if (this.currentMorale <= 0 && !(this.currentDay >= 6 && this.currentDay <= 7)) {
+            this.isProcessingDayChange = false;
+            this.showMoraleGameOver();
+            return;
+        }
 
         // Add day log
         this.gameLogs = [
@@ -229,9 +244,16 @@ export class GameInterface {
         this.currentIntel = Math.min(100, this.currentIntel + intelGain);
         this.currentMorale = Math.max(0, this.currentMorale - moraleLoss);
         
-        // Check for morale death (only before day 6, not during AI twist)
-        if (this.currentMorale <= 0 && this.currentDay < 6) {
+        // Check for morale death (not during AI twist mode days 6-7)
+        if (this.currentMorale <= 0 && !(this.currentDay >= 6 && this.currentDay <= 7)) {
             this.showMoraleGameOver();
+            return;
+        }
+        
+        // Check if all soldiers are dead (game over)
+        const allDead = this.roster.every(char => char.status === 'DEAD');
+        if (allDead) {
+            this.showAllDeadGameOver();
             return;
         }
         
@@ -436,6 +458,46 @@ export class GameInterface {
         document.body.appendChild(modal);
         
         const restartBtn = modal.querySelector('#morale-restart');
+        const escHandler = (e) => {
+            if (e.key === 'Escape') {
+                location.reload();
+            }
+        };
+        
+        restartBtn.addEventListener('click', () => {
+            location.reload();
+        });
+        document.addEventListener('keydown', escHandler);
+    }
+
+    showAllDeadGameOver() {
+        const modal = document.createElement('div');
+        modal.className = 'fixed inset-0 z-[200] flex items-center justify-center bg-black/95 backdrop-blur-md';
+        modal.innerHTML = `
+            <div class="w-full max-w-4xl bg-black border-4 border-alert-red p-8 text-center relative overflow-hidden m-4">
+                <div class="absolute inset-0 bg-alert-red/20 z-0"></div>
+                <h1 class="text-6xl text-alert-red font-tech mb-6 relative z-10 drop-shadow-[0_0_30px_rgba(255,51,51,1)] animate-pulse">
+                    TÜM EKİP KAYBEDİLDİ
+                </h1>
+                <div class="relative z-10 space-y-6 text-gray-200 font-tech">
+                    <p class="text-3xl text-neon-green mb-4">[KRİTİK HATA]</p>
+                    <div class="bg-black/70 border border-alert-red p-8 space-y-6">
+                        <p class="text-2xl">Tüm askerlerin öldü...</p>
+                        <p class="text-3xl text-alert-red font-bold">ÜSTE KİMSE KALMADI</p>
+                        <p class="text-xl text-gray-400 mt-6">Kayıplar çok fazlaydı. Artık savaşabilecek kimse yok.</p>
+                        <p class="text-xl text-gray-400">AI ajanları savunmasız kalan üssü ele geçirdi.</p>
+                        <p class="text-2xl text-alert-red mt-8">[OYUN BİTTİ - EKİP DAĞILDI]</p>
+                    </div>
+                    <button id="alldead-restart" class="mt-6 bg-alert-red text-white px-8 py-4 font-tech text-xl border-2 border-white hover:bg-white hover:text-black transition-colors uppercase tracking-wider">
+                        YENİDEN BAŞLA
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        
+        const restartBtn = modal.querySelector('#alldead-restart');
         const escHandler = (e) => {
             if (e.key === 'Escape') {
                 location.reload();

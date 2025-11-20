@@ -42,7 +42,6 @@ export class CharacterCard {
                          character.status === 'INJURED' ? 'sepia-[.5]' :
                          'sepia-[20%] brightness-75 group-hover:filter-none group-hover:scale-110'}
                     "
-                    onerror="this.src='https://picsum.photos/200/250?random=${character.id}'"
                 />
                 <div class="absolute top-2 left-2 bg-black/70 border border-neon-green text-neon-green text-[10px] px-2 py-1 font-tech tracking-widest">
                     ${character.role}

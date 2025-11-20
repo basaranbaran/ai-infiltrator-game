@@ -302,7 +302,6 @@ export class InterrogationView {
                                 src="${this.getMonitorImage(this.selectedChar)}" 
                                 class="w-full h-full object-cover opacity-30 filter contrast-125"
                                 alt="Background"
-                                onerror="this.src='https://picsum.photos/800/600?random=scared'"
                             />
                             <div class="absolute inset-0 bg-black/70"></div>
                         </div>
