@@ -195,26 +195,6 @@ python3 -m http.server 8080
 ### Görüntüler Yüklenmiyor
 - `assets/images/` klasörünün doğru konumda olduğundan emin olun
 - Konsolu kontrol edin (F12) ve 404 hatalarını inceleyin
-
----
-
-## 🎯 Geliştirme Notları
-
-### Oyun Akışı
-```
-START SCREEN → INTRO (Cinematic) → GAME INTERFACE → DAY 1-5 (Normal Play)
-                                                    ↓
-                                              DAY 6 (AI Twist)
-                                                    ↓
-                                              DAY 7 (Finale)
-                                                    ↓
-                                              END SCREEN
-```
-
-### Klavye Kısayolları
-- `ESC`: Açık modal'ları kapat
-- `?`: Oyun kılavuzunu aç
-
 ---
 
 ## 🎮 İyi Oyunlar!
