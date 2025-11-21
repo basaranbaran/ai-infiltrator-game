@@ -204,9 +204,3 @@ Ekibinize sızan AI ajanlarını bulabilecek misiniz? Yoksa onlar sizi mi bulaca
 **İnsanlığın kaderi sizin ellerinizde, Komutan.** 🫡
 
 ---
-
-## 📞 Destek
-
-Sorun yaşarsanız veya önerileriniz varsa GitHub Issues bölümünden bildirebilirsiniz.
-
-**Keyifli Oyunlar! 🎲**
