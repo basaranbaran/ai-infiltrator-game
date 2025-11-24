@@ -62,7 +62,7 @@ start-server.bat
 .\start-server.ps1
 ```
 
-#### Linux/Mac:
+#### Linux/Mac + Windows (eğer yukarıdaki yöntemler çalışmazsa):
 ```bash
 python3 -m http.server 8000
 ```
